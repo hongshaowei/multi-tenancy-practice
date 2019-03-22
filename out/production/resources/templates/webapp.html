@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <head>
+        <title>系統首頁</title>
+        <meta name="_csrf" th:content="${_csrf.token}"/>
+        <!-- default header name is X-CSRF-TOKEN -->
+        <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="../static/css/bootstrap-reboot.css" th:href="@{/css/bootstrap-reboot.css}" />
+        <link rel="stylesheet"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="../static/css/all.min.css" th:href="@{/css/all.min.css}">
+        <link rel="stylesheet" href="../static/css/webapp.css" th:href="@{/css/webapp.css}">
+
+    </head>
+    <body>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-lg sticky-top d-flex">
+            <button class="navbar-toggler" id="navbar-toggler-icon" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navBrand mr-auto" id="navbarLogo">
+                <span class="navbar-brand mb-0 font-weight-bold" style="font-size: 27px; color: rgb(32, 155, 204);">LondoBell</span>
+            </div>
+            <div class="dropdown ml-auto">
+                <button type="button" class="btn btn-info dropdown-toggle" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 12px;">
+                    [[${currentUser.firstName}]]
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <!-- Add a logout button -->
+                    <form class="dropdown-item" th:action="@{/logout}" method="POST">
+                        <button class="btn btn-sm btn-primary btn-block" type="submit">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <div class="main-container">
+            <div class="sideBar">
+                <!-- mainNav -->
+                <div class="mainNav">
+                    <ul class="nav">
+                        <li>
+                            <a href="">
+                                <i class="fas fa-square-root-alt"></i>
+                                <span>首頁</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>預約</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                                <span>帳單</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fas fa-user-friends"></i>
+                                <span>顧客</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="far fa-smile"></i>
+                                <span>員工</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fas fa-box-open"></i>
+                                <span>庫存</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="far fa-hand-scissors"></i>
+                                <span>服務</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fas fa-chart-pie"></i>
+                                <span>報表</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- sideNav-->
+                <div class="sideNav">
+                    <div id="datepicker"></div>
+                    <div id="entities-box">
+                        <div class="scrollable-list">
+                            <div class="users-list">
+                                <h3>設計師</h3>
+                                <div class="entity-list">
+                                    <label th:each="user : ${userList}">
+                                        <input type="checkbox" checked>
+                                        <span th:text="${user.firstName}">username</span>
+                                        <div class="colorReceiver"></div>
+                                        <div class="userbox" th:style="|background-color: ${user.color}|"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script>var tenantId = "[[${tenantName}]]";</script>
+        <!--  Bootstrap JS -->
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+        <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+                integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+                integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+                crossorigin="anonymous"></script>
+        <script src="../static/js/main.js" th:src="@{/js/main.js}"></script>
+    </body>
+</html>
